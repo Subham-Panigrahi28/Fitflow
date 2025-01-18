@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monthly Challenges</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #challenges {
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    #challenges h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #2a7fcc;
+    }
+
+    .challenge {
+      background: #eaf6ff;
+      margin-bottom: 10px;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .challenge h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #2a7fcc;
+    }
+
+    .challenge button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .challenge button:hover {
+      background-color: #367bb7;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-bar-fill {
+      height: 20px;
+      background-color: #4a90e2;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    #leaderboard {
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    #leaderboard h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #2a7fcc;
+    }
+
+    #leaderboard ol {
+      list-style: none;
+      padding: 0;
+    }
+
+    #leaderboard ol li {
+      background: #eaf6ff;
+      margin-bottom: 10px;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #leaderboard ol li:first-child {
+      background-color: #4a90e2;
+      color: #ffffff;
+    }
+
+    #leaderboard ol li:nth-child(2) {
+      background-color: #367bb7;
+      color: #ffffff;
+    }
+
+    #leaderboard ol li:nth-child(3) {
+      background-color: #00509E;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">FitFlow</div>
+      <nav class="nav-links">
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="workouts.html">Workouts</a></li>
+          <li><a href="nutrition.html">Nutrition</a></li>
+          <li><a href="meal_planner.html">Meal Planner</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+          <li><a href="monthly-challenges.html" class="active">Challenges</a></li>
+          <li><a href="big-day.html">Big Day</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="forum.html">Community Forum</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="hero-section">
+        <div class="hero-content">
+          <h1>Monthly Challenges</h1>
+        </div>
+      </header>
+
+      <section id="challenges">
+        <h2>Active Challenges</h2>
+        <div class="challenge">
+          <h3>Run 5km daily for a week</h3>
+          <button onclick="updateProgress(this, 0.7)">Track Progress</button>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: 70%;"></div>
+          </div>
+        </div>
+        <div class="challenge">
+          <h3>Eat no sugar for 10 days</h3>
+          <button onclick="updateProgress(this, 0.5)">Track Progress</button>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: 50%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="leaderboard">
+        <h2>Leaderboard</h2>
+        <ol>
+          <li>User1 - 10 Points</li>
+          <li>User2 - 8 Points</li>
+          <li>User3 - 6 Points</li>
+        </ol>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 FitFlow. Take on the challenge!</p>
+  </footer>
+
+  <script>
+    function updateProgress(button, progress) {
+      const progressBarFill = button.nextElementSibling.querySelector('.progress-bar-fill');
+      progressBarFill.style.width = (progress * 100) + '%';
+    }
+  </script>
+</body>
+</html>

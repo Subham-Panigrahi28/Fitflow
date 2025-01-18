@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitFlow - Meal Planner</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .meal-form {
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .meal-form label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .meal-form input {
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .meal-form button {
+      margin-top: 20px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .meal-form button:hover {
+      background-color: #367bb7;
+    }
+
+    .meal-plan {
+      margin-top: 20px;
+    }
+
+    .meal-plan h2 {
+      margin-top: 0;
+    }
+
+    .meal-plan ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .meal-plan li {
+      background-color: #eaf4fc;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">FitFlow</div>
+      <nav class="nav-links">
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="workouts.html">Workouts</a></li>
+          <li><a href="nutrition.html">Nutrition</a></li>
+          <li><a href="meal_planner.html" class="active">Meal Planner</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+          <li><a href="monthly-challenges.html">Challenges</a></li>
+          <li><a href="big-day.html">Big Day</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="forum.html">Community Forum</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="hero-section">
+        <div class="hero-content">
+          <h1>Customize Your Meal Plan</h1>
+          <p>Track your macros and hit your goals with precision.</p>
+        </div>
+      </header>
+
+      <section class="meal-planner-section">
+        <h2>Track Your Intake</h2>
+        <form class="meal-form" id="meal-form">
+          <label for="food-item">Food Item</label>
+          <input type="text" id="food-item" placeholder="E.g., Chicken Breast" required>
+
+          <label for="calories">Calories</label>
+          <input type="number" id="calories" placeholder="E.g., 200" required>
+
+          <label for="protein">Protein (g)</label>
+          <input type="number" id="protein" placeholder="E.g., 30" required>
+
+          <label for="carbs">Carbs (g)</label>
+          <input type="number" id="carbs" placeholder="E.g., 5" required>
+
+          <label for="fats">Fats (g)</label>
+          <input type="number" id="fats" placeholder="E.g., 2" required>
+
+          <button type="submit">Add to Meal Plan</button>
+        </form>
+      </section>
+
+      <section class="meal-plan" id="meal-plan">
+        <h2>Today's Meal Plan</h2>
+        <ul>
+          <!-- Meal plan items will be dynamically added here -->
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 FitFlow. Fuel your success.</p>
+  </footer>
+
+  <script>
+    const mealForm = document.getElementById('meal-form');
+    const mealPlanList = document.getElementById('meal-plan').querySelector('ul');
+
+    mealForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const foodItem = document.getElementById('food-item').value;
+      const calories = document.getElementById('calories').value;
+      const protein = document.getElementById('protein').value;
+      const carbs = document.getElementById('carbs').value;
+      const fats = document.getElementById('fats').value;
+
+      const mealPlanItem = document.createElement('li');
+      mealPlanItem.innerHTML = `
+        <strong>${foodItem}</strong>
+        <p>Calories: ${calories}, Protein: ${protein}g, Carbs: ${carbs}g, Fats: ${fats}g</p>
+      `;
+
+      mealPlanList.appendChild(mealPlanItem);
+
+      mealForm.reset();
+    });
+  </script>
+</body>
+</html>

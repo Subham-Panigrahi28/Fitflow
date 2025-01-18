@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitFlow - Nutrition</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .diet-card button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .diet-card button:hover {
+      background-color: #367bb7;
+    }
+
+    .diet-plan {
+      background-color: #ffffff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .diet-plan h3 {
+      margin-top: 0;
+    }
+
+    .diet-plan p {
+      margin: 10px 0;
+    }
+
+    .customize-form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+
+    .customize-form label {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .customize-form input, .customize-form select {
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .customize-form button {
+      margin-top: 20px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .customize-form button:hover {
+      background-color: #367bb7;
+    }
+
+    .personalized-diet {
+      background-color: #ffffff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .personalized-diet h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #2a7fcc;
+    }
+
+    .personalized-diet ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .personalized-diet ul li {
+      margin-bottom: 10px;
+    }
+
+    .personalized-diet ul li strong {
+      color: #4a90e2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">FitFlow</div>
+      <nav class="nav-links">
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="workouts.html">Workouts</a></li>
+          <li><a href="nutrition.html" class="active">Nutrition</a></li>
+          <li><a href="meal_planner.html">Meal Planner</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+          <li><a href="monthly-challenges.html">Challenges</a></li>
+          <li><a href="big-day.html">Big Day</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="forum.html">Community Forum</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="hero-section">
+        <div class="hero-content">
+          <h1>Explore Nutrition Plans</h1>
+          <p>Choose the diet that suits your goals and customize it your way.</p>
+        </div>
+      </header>
+
+      <section class="diet-section">
+        <h2>Popular Diet Plans</h2>
+        <div class="diet-grid">
+          <div class="diet-card">
+            <h3>Keto Diet</h3>
+            <p>Low-carb, high-fat diet to help burn fat effectively.</p>
+            <button onclick="selectDiet('Keto Diet')">Select</button>
+          </div>
+          <div class="diet-card">
+            <h3>Vegan Diet</h3>
+            <p>Plant-based meals for a sustainable and ethical approach.</p>
+            <button onclick="selectDiet('Vegan Diet')">Select</button>
+          </div>
+          <div class="diet-card">
+            <h3>High-Protein Diet</h3>
+            <p>Perfect for building and maintaining muscle mass.</p>
+            <button onclick="selectDiet('High-Protein Diet')">Select</button>
+          </div>
+          <div class="diet-card">
+            <h3>Intermittent Fasting</h3>
+            <p>A time-based eating plan for better metabolic health.</p>
+            <button onclick="selectDiet('Intermittent Fasting')">Select</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="diet-plan" id="diet-plan">
+        <!-- Selected diet plan details and customization options will appear here -->
+      </section>
+
+      <section class="personalized-diet">
+        <h2>Personalized Bulk Diet Plan</h2>
+        <p>Here is your personalized bulk diet plan for today:</p>
+        <ul>
+          <li><strong>Breakfast:</strong> 3 scrambled eggs, 2 slices of whole-grain toast, 1 avocado</li>
+          <li><strong>Snack:</strong> Protein shake with banana</li>
+          <li><strong>Lunch:</strong> Grilled chicken breast, quinoa, mixed vegetables</li>
+          <li><strong>Snack:</strong> Greek yogurt with honey and almonds</li>
+          <li><strong>Dinner:</strong> Baked salmon, sweet potato, steamed broccoli</li>
+          <li><strong>Snack:</strong> Cottage cheese with berries</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 FitFlow. Your fitness, your way.</p>
+  </footer>
+
+  <script>
+    function selectDiet(dietName) {
+      const dietPlanSection = document.getElementById('diet-plan');
+      dietPlanSection.innerHTML = `
+        <h3>${dietName} Plan</h3>
+        <p>Your selected diet plan: ${dietName}. Customize it to fit your needs and preferences!</p>
+        <form class="customize-form">
+          <label for="calories">Daily Calorie Intake</label>
+          <input type="number" id="calories" name="calories" placeholder="e.g., 2000" required>
+
+          <label for="meals">Number of Meals per Day</label>
+          <select id="meals" name="meals" required>
+            <option value="3">3 meals</option>
+            <option value="4">4 meals</option>
+            <option value="5">5 meals</option>
+          </select>
+
+          <label for="protein">Protein (g)</label>
+          <input type="number" id="protein" name="protein" placeholder="e.g., 150" required>
+
+          <label for="carbs">Carbs (g)</label>
+          <input type="number" id="carbs" name="carbs" placeholder="e.g., 200" required>
+
+          <label for="fats">Fats (g)</label>
+          <input type="number" id="fats" name="fats" placeholder="e.g., 70" required>
+
+          <button type="submit">Customize Plan</button>
+        </form>
+      `;
+    }
+  </script>
+</body>
+</html>

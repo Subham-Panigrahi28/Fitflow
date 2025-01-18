@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitFlow - AI Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .chat-window {
+      flex: 1;
+      overflow-y: auto;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .message-content {
+      background-color: #eaf6ff;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 75%;
+    }
+
+    .message-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .username {
+      font-weight: bold;
+      margin-right: 10px;
+      color: #4a90e2;
+    }
+
+    .timestamp {
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .message-text {
+      margin: 0;
+      color: #333;
+    }
+
+    .chat-form {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-form input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+      font-size: 1rem;
+    }
+
+    .chat-form button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .chat-form button:hover {
+      background-color: #367bb7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <main class="chat-container">
+      <header class="hero-section">
+        <div class="hero-content">
+          <h1>Chat with AI</h1>
+          <p>Provide additional details to create your personalized plan.</p>
+        </div>
+      </header>
+
+      <section class="chat-window" id="messages">
+        <!-- AI's initial message -->
+        <div class="message">
+          <img class="avatar" src="https://via.placeholder.com/40" alt="AI Avatar">
+          <div class="message-content">
+            <div class="message-header">
+              <span class="username">AI</span>
+              <span class="timestamp">10:30 AM</span>
+            </div>
+            <p class="message-text">Hello! Based on the information you provided, I have a few more questions to finalize your personalized plan. Do you prefer working out in the morning, afternoon, or evening?</p>
+          </div>
+        </div>
+      </section>
+
+      <form class="chat-form" id="chat-form">
+        <input type="text" id="message-input" placeholder="Type your message..." required>
+        <button type="submit">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 FitFlow. Personalized just for you!</p>
+  </footer>
+
+  <script>
+    const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message-input');
+    const messagesDiv = document.getElementById('messages');
+
+    const exampleAvatar = 'https://via.placeholder.com/40'; // Placeholder avatar image
+
+    function addMessage(sender, text) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+
+      const avatar = document.createElement('img');
+      avatar.classList.add('avatar');
+      avatar.src = exampleAvatar; // Placeholder avatar image
+
+      const messageContent = document.createElement('div');
+      messageContent.classList.add('message-content');
+
+      const messageHeader = document.createElement('div');
+      messageHeader.classList.add('message-header');
+
+      const username = document.createElement('span');
+      username.classList.add('username');
+      username.textContent = sender;
+
+      const timestamp = document.createElement('span');
+      timestamp.classList.add('timestamp');
+      timestamp.textContent = new Date().toLocaleTimeString();
+
+      const messageText = document.createElement('p');
+      messageText.classList.add('message-text');
+      messageText.textContent = text;
+
+      messageHeader.appendChild(username);
+      messageHeader.appendChild(timestamp);
+      messageContent.appendChild(messageHeader);
+      messageContent.appendChild(messageText);
+      messageElement.appendChild(avatar);
+      messageElement.appendChild(messageContent);
+      messagesDiv.appendChild(messageElement);
+
+      // Scroll to the bottom of the chat
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    chatForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const messageText = messageInput.value;
+      if (messageText.trim() !== '') {
+        addMessage('You', messageText);
+        messageInput.value = '';
+
+        // Simulate AI response after 1 second
+        setTimeout(() => {
+          let response;
+          if (messageText.toLowerCase().includes('morning') || messageText.toLowerCase().includes('afternoon') || messageText.toLowerCase().includes('evening')) {
+            response = 'Thank you! How many days a week do you plan to work out?';
+          } else if (!isNaN(messageText) && messageText > 0 && messageText <= 7) {
+            response = 'Got it! Do you have any dietary preferences or restrictions? (e.g., Vegetarian, Vegan, Gluten-Free, None)';
+          } else if (messageText.toLowerCase().includes('vegetarian') || messageText.toLowerCase().includes('vegan') || messageText.toLowerCase().includes('gluten-free') || messageText.toLowerCase().includes('none')) {
+            response = 'Great! Are there any specific exercises or types of workouts you enjoy or want to avoid?';
+          } else {
+            response = 'Perfect! Based on all the information you provided, I am now ready to prepare your personalized plan. This will take a moment...';
+            // Here you would typically process the information and generate a plan
+          }
+          addMessage('AI', response);
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>

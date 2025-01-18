@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitFlow - Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #ffffff;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #4a90e2;
+      margin-bottom: 30px;
+    }
+
+    .nav-links ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .nav-links ul li {
+      margin: 10px 0;
+    }
+
+    .nav-links ul li a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: #555;
+      padding: 10px 15px;
+      border-radius: 5px;
+      display: block;
+      text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-links ul li a.active,
+    .nav-links ul li a:hover {
+      background-color: #4a90e2;
+      color: #fff;
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .hero-section {
+      background-color: #eaf4fc;
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #2a7fcc;
+    }
+
+    .hero-content p {
+      margin: 10px 0 0;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-card h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #2a7fcc;
+    }
+
+    .stat-card p {
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .progress-bar {
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-bar-fill {
+      height: 20px;
+      background-color: #4a90e2;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .btn {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background-color: #367bb7;
+    }
+
+    .ai-chat-section {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .ai-chat-section h2 {
+      margin: 0 0 20px;
+      font-size: 1.5rem;
+      color: #2a7fcc;
+    }
+
+    .ai-chat-section button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .ai-chat-section button:hover {
+      background-color: #367bb7;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-group button:hover {
+      background-color: #367bb7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">FitFlow</div>
+      <nav class="nav-links">
+        <ul>
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+          <li><a href="workouts.html">Workouts</a></li>
+          <li><a href="nutrition.html">Nutrition</a></li>
+          <li><a href="meal_planner.html">Meal Planner</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+          <li><a href="monthly-challenges.html">Challenges</a></li>
+          <li><a href="big-day.html">Big Day</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="forum.html">Community Forum</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="hero-section">
+        <div class="hero-content">
+          <h1>Welcome to Your Dashboard</h1>
+          <p>Track your fitness journey, monitor progress, and stay motivated.</p>
+        </div>
+      </header>
+
+      <section class="stats-grid">
+        <div class="stat-card">
+          <h3>Workouts Completed</h3>
+          <p>25</p>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: 50%;"></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <h3>Calories Burned</h3>
+          <p>1500</p>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: 75%;"></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <h3>Nutrition Score</h3>
+          <p>80%</p>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: 80%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ai-chat-section">
+        <h2>Get Your Personalized Plan</h2>
+        <p>Start a chat with our AI to build a customized fitness and nutrition plan based on your goals.</p>
+        <button onclick="openFormModal()">Start AI Chat</button>
+      </section>
+    </main>
+    </div>
+    
+    <!-- The Modal -->
+    <div id="formModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeFormModal()">&times;</span>
+        <h2>Personalize Your Plan</h2>
+        <form id="ai-form" action="ai-chat.html">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+              <option value="">Select</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" required>
+          </div>
+          <div class="form-group">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" id="weight" name="weight" required>
+          </div>
+          <div class="form-group">
+            <label for="height">Height (cm)</label>
+            <input type="number" id="height" name="height" required>
+          </div>
+          <div class="form-group">
+            <label for="goal">Fitness Goal</label>
+            <select id="goal" name="goal" required>
+              <option value="">Select</option>
+              <option value="lose_weight">Lose Weight</option>
+              <option value="build_muscle">Build Muscle</option>
+              <option value="improve_endurance">Improve Endurance</option>
+              <option value="maintain_fitness">Maintain Fitness</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <footer>
+      <p>&copy; 2024 FitFlow. Stay on track!</p>
+    </footer>
+    
+    <script>
+      function openFormModal() {
+        document.getElementById('formModal').style.display = 'block';
+      }
+    
+      function closeFormModal() {
+        document.getElementById('formModal').style.display = 'none';
+      }
+    
+      // Close the modal if the user clicks outside of it
+      window.onclick = function(event) {
+        const modal = document.getElementById('formModal');
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      }
+    </script>
+    </body>
+    </html>
+    

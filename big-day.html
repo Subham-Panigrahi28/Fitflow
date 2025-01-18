@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big Day</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #ffffff;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #4a90e2;
+      margin-bottom: 30px;
+    }
+
+    .nav-links ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .nav-links ul li {
+      margin: 10px 0;
+    }
+
+    .nav-links ul li a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: #555;
+      padding: 10px 15px;
+      border-radius: 5px;
+      display: block;
+      text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-links ul li a.active,
+    .nav-links ul li a:hover {
+      background-color: #4a90e2;
+      color: #fff;
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .hero-section {
+      background-color: #eaf4fc;
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #2a7fcc;
+    }
+
+    .journal-section {
+      background-color: #ffffff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .journal-section h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #2a7fcc;
+    }
+
+    .journal-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .journal-form textarea {
+      resize: vertical;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .journal-form button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .journal-form button:hover {
+      background-color: #367bb7;
+    }
+
+    .entries {
+      margin-top: 20px;
+    }
+
+    .entry {
+      padding: 15px;
+      margin-bottom: 10px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .entry h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: #2a7fcc;
+    }
+
+    .entry p {
+      margin: 0;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .quote-section {
+      background-color: #eaf6ff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+      font-style: italic;
+      color: #4a90e2;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #ffffff;
+      border-top: 1px solid #ddd;
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">FitFlow</div>
+      <nav class="nav-links">
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="workouts.html">Workouts</a></li>
+          <li><a href="nutrition.html">Nutrition</a></li>
+          <li><a href="meal_planner.html">Meal Planner</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+          <li><a href="monthly-challenges.html">Challenges</a></li>
+          <li><a href="big-day.html" class="active">Big Day</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="forum.html">Community Forum</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="hero-section">
+        <div class="hero-content">
+          <h1>Big Day</h1>
+        </div>
+      </header>
+
+      <section class="journal-section">
+        <h2>Share Your Wins</h2>
+        <form class="journal-form">
+          <textarea id="journal-entry" placeholder="Share your progress and keep yourself accountable..." required></textarea>
+          <button type="submit">Post</button>
+        </form>
+        <div class="entries">
+          <!-- User entries will dynamically appear here -->
+          <div class="entry">
+            <h3>User1's Progress</h3>
+            <p>Today I managed to run 5km without stopping. Feeling amazing!</p>
+          </div>
+          <div class="entry">
+            <h3>User2's Win</h3>
+            <p>Hit a new personal best in deadlifts! Lifted 100kg for the first time.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="quote-section">
+        <p>"The only bad workout is the one that didn't happen."</p>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 FitFlow. Your journey matters!</p>
+  </footer>
+
+  <script src="big-day.js"></script>
+</body>
+</html>

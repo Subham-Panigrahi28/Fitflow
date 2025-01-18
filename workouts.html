@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitFlow - Workouts</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .workout-card button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .workout-card button:hover {
+      background-color: #367bb7;
+    }
+
+    .tracker-calendar {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .calendar-day {
+      width: 40px;
+      height: 40px;
+      background-color: #eaf4fc;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #555;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .calendar-day.completed {
+      background-color: #4a90e2;
+      color: #fff;
+    }
+
+    .workout-details {
+      display: none;
+      background-color: #ffffff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .workout-details h3 {
+      margin-top: 0;
+    }
+
+    .personalized-workout {
+      background-color: #ffffff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .personalized-workout h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #2a7fcc;
+    }
+
+    .personalized-workout ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .personalized-workout ul li {
+      margin-bottom: 10px;
+    }
+
+    .personalized-workout ul li strong {
+      color: #4a90e2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">FitFlow</div>
+      <nav class="nav-links">
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="workouts.html">Workouts</a></li>
+            <li><a href="nutrition.html" class="active">Nutrition</a></li>
+            <li><a href="meal_planner.html">Meal Planner</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="monthly-challenges.html">Challenges</a></li>
+            <li><a href="big-day.html">Big Day</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="forum.html">Community Forum</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="hero-section">
+        <div class="hero-content">
+          <h1>Workouts</h1>
+          <p>Find the perfect workout to match your fitness goals.</p>
+        </div>
+      </header>
+
+      <section class="workouts-section">
+        <h2>Popular Workouts</h2>
+        <div class="workouts-grid">
+          <div class="workout-card">
+            <h3>Beginner Full-Body</h3>
+            <p>Duration: 30 mins</p>
+            <p>Equipment: None</p>
+            <button onclick="showDetails('Beginner Full-Body')">Details</button>
+            <button onclick="startWorkout('Beginner Full-Body')">Start Now</button>
+          </div>
+          <div class="workout-card">
+            <h3>HIIT Cardio Blast</h3>
+            <p>Duration: 20 mins</p>
+            <p>Equipment: Mat</p>
+            <button onclick="showDetails('HIIT Cardio Blast')">Details</button>
+            <button onclick="startWorkout('HIIT Cardio Blast')">Start Now</button>
+          </div>
+          <div class="workout-card">
+            <h3>Strength Training</h3>
+            <p>Duration: 45 mins</p>
+            <p>Equipment: Dumbbells</p>
+            <button onclick="showDetails('Strength Training')">Details</button>
+            <button onclick="startWorkout('Strength Training')">Start Now</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="workout-details" id="workout-details">
+        <!-- Detailed workout information will be shown here -->
+      </section>
+
+      <section class="personalized-workout">
+        <h2>Personalized Workout Plan</h2>
+        <p>Welcome, User! Here is your personalized Push Day workout plan for today:</p>
+        <ul>
+          <li><strong>Bench Press:</strong> 4 sets of 8-10 reps</li>
+          <li><strong>Overhead Shoulder Press:</strong> 4 sets of 10-12 reps</li>
+          <li><strong>Incline Dumbbell Press:</strong> 3 sets of 10-12 reps</li>
+          <li><strong>Lateral Raises:</strong> 3 sets of 15 reps</li>
+          <li><strong>Tricep Dips:</strong> 3 sets of 10-12 reps</li>
+          <li><strong>Push-Ups:</strong> 3 sets to failure</li>
+          <li><strong>Cool Down:</strong> 5-10 mins stretching</li>
+        </ul>
+      </section>
+
+      <section class="tracker-section">
+        <h2>Workout Tracker</h2>
+        <p>Track your progress below:</p>
+        <div class="tracker-calendar" id="tracker-calendar">
+          <div class="calendar-day">Mon</div>
+          <div class="calendar-day">Tue</div>
+          <div class="calendar-day">Wed</div>
+          <div class="calendar-day">Thu</div>
+          <div class="calendar-day">Fri</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 FitFlow. Keep moving!</p>
+  </footer>
+
+  <script>
+    function showDetails(workoutName) {
+      const details = document.getElementById('workout-details');
+      details.style.display = 'block';
+      details.innerHTML = `<h3>${workoutName} Details</h3>
+        <p>Duration: 30 minutes</p>
+        <p>Exercises: 10 push-ups, 15 squats, 20 jumping jacks, repeat 3 times.</p>`;
+    }
+
+    function startWorkout(workoutName) {
+      alert(`Starting ${workoutName} workout!`);
+    }
+
+    const calendarDays = document.querySelectorAll('.calendar-day');
+    calendarDays.forEach(day => {
+      day.addEventListener('click', () => {
+        day.classList.toggle('completed');
+      });
+    });
+  </script>
+</body>
+</html>

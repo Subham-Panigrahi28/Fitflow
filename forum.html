@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Forum</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Forum Page Styles */
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      display: flex;
+      height: 100%;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #ffffff;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #4a90e2;
+      margin-bottom: 30px;
+    }
+
+    .nav-links ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .nav-links ul li {
+      margin: 10px 0;
+    }
+
+    .nav-links ul li a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: #555;
+      padding: 10px 15px;
+      border-radius: 5px;
+      display: block;
+      text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-links ul li a.active,
+    .nav-links ul li a:hover {
+      background-color: #4a90e2;
+      color: #fff;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .hero-section {
+      background-color: #eaf4fc;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .hero-content h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #2a7fcc;
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .chat-window {
+      flex: 1;
+      overflow-y: auto;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .message-content {
+      background-color: #eaf6ff;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 75%;
+    }
+
+    .message-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .username {
+      font-weight: bold;
+      margin-right: 10px;
+      color: #4a90e2;
+    }
+
+    .timestamp {
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .message-text {
+      margin: 0;
+      color: #333;
+    }
+
+    .chat-form {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-form input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+      font-size: 1rem;
+    }
+
+    .chat-form button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .chat-form button:hover {
+      background-color: #367bb7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">FitFlow</div>
+      <nav class="nav-links">
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="workouts.html">Workouts</a></li>
+          <li><a href="nutrition.html">Nutrition</a></li>
+          <li><a href="meal_planner.html">Meal Planner</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+          <li><a href="monthly-challenges.html">Challenges</a></li>
+          <li><a href="big-day.html">Big Day</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="forum.html" class="active">Community Forum</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="hero-section">
+        <div class="hero-content">
+          <h1>Community Forum</h1>
+        </div>
+      </header>
+
+      <section class="chat-container">
+        <div class="chat-window" id="messages">
+          <!-- Example messages -->
+          <div class="message">
+            <img class="avatar" src="https://via.placeholder.com/40" alt="User Avatar">
+            <div class="message-content">
+              <div class="message-header">
+                <span class="username">User1</span>
+                <span class="timestamp">10:30 AM</span>
+              </div>
+              <p class="message-text">Hey everyone! Just completed my morning run. Feeling great!</p>
+            </div>
+          </div>
+          <div class="message">
+            <img class="avatar" src="https://via.placeholder.com/40" alt="User Avatar">
+            <div class="message-content">
+              <div class="message-header">
+                <span class="username">User2</span>
+                <span class="timestamp">10:35 AM</span>
+              </div>
+              <p class="message-text">That's awesome! I just finished my workout too.</p>
+            </div>
+          </div>
+        </div>
+        <form class="chat-form" id="chat-form">
+          <input type="text" id="message-input" placeholder="Type your message..." required>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 FitFlow. Connect and share!</p>
+  </footer>
+
+  <script>
+    const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message-input');
+    const messagesDiv = document.getElementById('messages');
+
+    chatForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const messageText = messageInput.value;
+      if (messageText.trim() !== '') {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+
+        const avatar = document.createElement('img');
+        avatar.classList.add('avatar');
+        avatar.src = 'https://via.placeholder.com/40'; // Placeholder avatar image
+
+        const messageContent = document.createElement('div');
+        messageContent.classList.add('message-content');
+
+        const messageHeader = document.createElement('div');
+        messageHeader.classList.add('message-header');
+
+        const username = document.createElement('span');
+        username.classList.add('username');
+        username.textContent = 'User1';
+
+        const timestamp = document.createElement('span');
+        timestamp.classList.add('timestamp');
+        timestamp.textContent = new Date().toLocaleTimeString();
+
+        const messageTextElement = document.createElement('p');
+        messageTextElement.classList.add('message-text');
+        messageTextElement.textContent = messageText;
+
+        messageHeader.appendChild(username);
+        messageHeader.appendChild(timestamp);
+        messageContent.appendChild(messageHeader);
+        messageContent.appendChild(messageTextElement);
+        messageElement.appendChild(avatar);
+        messageElement.appendChild(messageContent);
+        messagesDiv.appendChild(messageElement);
+
+        // Scroll to the bottom of the chat
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+        messageInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
